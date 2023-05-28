@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Bienvenido</h1>
+    <form [formGroup]="formLogin" class="content">
+        <label for="email">Correo electrónico:</label>
+        <input formControlName="email" type="text" name="email">
+        <div *ngIf="formData['email'].errors && formData['email'].invalid && formData['email'].dirty"
+            class="invalid-data">
+            <div *ngIf="formData['email'].errors['required']">El correo electrónico es
+                obligatorio</div>
+            <div *ngIf="formData['email'].errors['pattern']">El correo electrónico no es válido
+            </div>
+        </div>
+        <label>Contraseña:</label>
+        <input formControlName="password" type="password">
+        <div *ngIf="formData['password'].errors && formData['password'].invalid && formData['password'].dirty"
+            class="invalid-data">
+            La contraseña es obligatoria
+        </div>
+        <button [disabled]="formLogin.invalid" routerLink="/home" (click)="login()">INGRESAR</button>
+    </form>
+    <div class="content">
+        <a>Olvidé mi contraseña</a>
+        <span>¿No tienes cuenta? <a>Regístrate</a></span>
+    </div>
+</div>
