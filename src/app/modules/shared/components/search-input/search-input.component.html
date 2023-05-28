@@ -1,0 +1,7 @@
+<input [(ngModel)]="searchText" (input)="onInput($event)" type="text">
+<ul *ngIf="!isSearched">
+    <li *ngFor="let value of (values | appSearch: searchText)" appHighlight [searchedWord]="searchText"
+        [content]="value.name + ' - ' + value.description" (click)="onSelect(value.name)">
+        {{value.name}} - {{value.description}}
+    </li>
+</ul>

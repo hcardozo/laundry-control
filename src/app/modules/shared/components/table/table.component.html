@@ -1,0 +1,50 @@
+<div>
+    <h1>{{title}}</h1>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th *ngFor="let column of columns">{{column.value}}</th>
+            <th style="width: 10%;">
+                Ver
+            </th>
+            <th style="width: 10%;">
+                Editar
+            </th>
+            <th style="width: 10%;">
+                Eliminar
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let value of data">
+            <td *ngFor="let column of columns">{{value[column.key]}}</td>
+            <td>
+                <app-icon class="block-center" icon="ver-line"></app-icon>
+            </td>
+            <td>
+                <app-icon class="block-center" icon="edit"></app-icon>
+            </td>
+            <td>
+                <app-icon class="block-center" icon="delete"></app-icon>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="footer">
+    <div>
+        <label>Items</label>
+        <select (change)="onChangeSize($event)">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+        </select>
+    </div>
+    <ul>
+        <li (click)="onPageChange(index)" *ngFor="let numberPage of [].constructor(page.totalPages); let index = index">
+            <a>{{index+1}}</a></li>
+
+    </ul>
+</div>
+
