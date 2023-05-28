@@ -1,0 +1,89 @@
+<div class="container">
+    <h1>{{title}}</h1>
+    <div class="column-items subtitle">
+        <span><strong>Cliente: </strong> {{client.name}} {{client.surname}}</span>
+        <span><strong>Teléfono: </strong>{{client.phoneNumber}}</span>
+    </div>
+    <hr>
+    <div class="header">
+        <span style="padding-bottom: 10px;">Ingrese el código</span>
+        <app-search-input [values]="products" [(ngModel)]="productName" (ngModelChange)="onSearch()"></app-search-input>
+    </div>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th width="7%">Cantidad</th>
+                <th width="7%">Código</th>
+                <th width="15%">Descripción</th>
+                <th>Observación</th>
+                <th width="15%">Valor Unitario</th>
+                <th width="10%">Total</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let detail of invoice.detail;let index=index;">
+                <td>
+                    <input [value]="detail.quantity" (input)="onInputQuantity(index, $event)" min=0 type="number"
+                        class="align-text-center size-input" />
+                </td>
+                <td>{{detail.name}}</td>
+                <td>{{detail.description}}</td>
+                <td>
+                    <div class="textarea-container">
+                        <textarea class="responsive-textarea"></textarea>
+                    </div>
+                </td>
+
+                <td><input [value]="detail.value" (input)="onInputPrice(index, $event)" type="text"
+                        appInputCurrencyDirective class="align-text-end size-input" /></td>
+                <td class="align-text-end">{{detail.totalValue |
+                    currency:'COP':'symbol-narrow':'0.0-2'}}</td>
+                <td class="block-center"><app-icon icon="delete"></app-icon></td>
+            </tr>
+            <tr>
+                <td colspan="6" class="end">
+                    Total:
+                </td>
+                <td class="end">{{totalValue | currency:'COP':'symbol-narrow':'0.0-2'}}</td>
+            </tr>
+            <tr>
+                <td colspan="6" class="end">
+                    Abono:
+                </td>
+                <td><input [(ngModel)]="invoice.deposit" type="text" appInputCurrencyDirective class="align-text-end" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" class="end">
+                    Saldo:
+                </td>
+                <td class="end">{{balance | currency:'COP':'symbol-narrow':'0.0-2'}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="between-items">
+        <div class="column-items">
+            <label>Piezas:</label>
+            {{totalQuantity}}
+        </div>
+        <div class="column-items">
+            <label>Fecha de entrega:</label>
+            <input type="date" [(ngModel)]="dateTomorrow" />
+        </div>
+        <div class="column-items">
+            <label>VALOR TOTAL:</label>
+            <input type="text" disabled />
+        </div>
+    </div>
+    <div class="column-items subtitle">
+        <label>Observaciones:</label>
+        <textarea></textarea>
+    </div>
+    <div class="end-items">
+        <button>
+            INSERTAR VENTA
+        </button>
+    </div>
+</div>
