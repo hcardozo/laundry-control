@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  > .title-client {
+    margin: unset;
+  }
+}
+
+
+
+form button {
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 600px) {
+  .input-group {
+    flex-direction: column;
+
+    input[type="text"] {
+      margin-bottom: 5px;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<p class="title-client">Diligencia los datos del cliente</p>
+<form [formGroup]="formClient" class="content">
+  <label for="name">Nombres:</label>
+  <input formControlName="name" type="text" name="name" />
+  <div *ngIf="controlsClient['name'].errors && controlsClient['name'].dirty" class="invalid-data">
+    <div *ngIf="controlsClient['name'].errors['required']">Nombres es obligatorio</div>
+  </div>
+  <label for="surname">Apellidos:</label>
+  <input formControlName="surname" type="text" name="surname" />
+  <div *ngIf="controlsClient['surname'].errors && controlsClient['surname'].dirty" class="invalid-data">
+    <div *ngIf="controlsClient['surname'].errors['required']">Apellidos es obligatorio</div>
+  </div>
+  <button [disabled]="formClient.invalid" (click)="createClient()">GENERAR</button>
+</form>
