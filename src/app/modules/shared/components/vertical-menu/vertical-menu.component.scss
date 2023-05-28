@@ -1,0 +1,46 @@
+:host {
+  background-color: #11101d;
+  user-select: none;
+}
+
+.icon-start {
+  padding-right: 10px;
+}
+
+.icon-end {
+  padding-left: 10px;
+  margin-left: auto;
+}
+
+nav {
+  color: #fff;
+
+  >div {
+    margin: 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  ul {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-left: 0px;
+    margin-right: 0px;
+
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    >li {
+      list-style-type: none;
+      cursor: pointer;
+
+      div {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}

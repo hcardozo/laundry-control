@@ -1,0 +1,43 @@
+<nav (mouseenter)='onMouseEnter()' (mouseleave)='onMouseLeave()'>
+  <div (click)="onCollapse()">
+    <app-icon icon="menu-hamburguesa" [ngClass]="{'icon-start':!isCollapsed}"></app-icon>
+    <ng-container *ngIf="!isCollapsed">Lavandería</ng-container>
+  </div>
+  <br />
+  <ng-container *ngTemplateOutlet="menuTemplate;context:{menus: menus}"></ng-container>
+  <ng-container *ngTemplateOutlet="endTemplate"></ng-container>
+</nav>
+
+<ng-template #menuTemplate let-menus="menus">
+  <ng-container *ngFor="let menu of menus; let index = index">
+    <ul>
+      <li [routerLink]="menu.redirectTo">
+        <div (click)="onCollapseSubMenu(menu)">
+          <ng-container *ngTemplateOutlet="item;context:{menu: menu}"></ng-container>
+        </div>
+        <ng-container *ngIf="menu.isCollapsed">
+          <ng-container *ngTemplateOutlet="menuTemplate;context:{menus: menu.menus}"></ng-container>
+        </ng-container>
+      </li>
+    </ul>
+  </ng-container>
+</ng-template>
+
+<ng-template #endTemplate>
+  <ul>
+    <li>
+      <div (click)="onLogout()">
+        <ng-container *ngTemplateOutlet="item;context:{menu: {icon: 'logout',name: 'Salir'}}">
+        </ng-container>
+      </div>
+    </li>
+  </ul>
+</ng-template>
+
+<ng-template #item let-menu="menu">
+  <app-icon *ngIf="menu.icon" [icon]="menu.icon" [ngClass]="{'icon-start':!isCollapsed}"></app-icon>
+  <ng-container *ngIf="!isCollapsed">
+    {{menu.name}}
+    <app-icon *ngIf="menu.menus" icon="flecha-abajo" [ngClass]="{'icon-end':!isCollapsed}"></app-icon>
+  </ng-container>
+</ng-template>
