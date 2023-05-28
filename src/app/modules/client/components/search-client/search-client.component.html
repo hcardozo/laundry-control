@@ -1,0 +1,25 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<div class="container">
+    <h1>Buscar Cliente</h1>
+    <form [formGroup]="formSearchClient" class="content">
+        <label for="phone">Teléfono:</label>
+        <input appInputOnlyNumberDirective maxlength="10" formControlName="phone" type="text" name="phone" />
+        <div *ngIf="formDataClient['phone'].errors && formDataClient['phone'].invalid && formDataClient['phone'].dirty"
+            class="invalid-data">
+            <div *ngIf="formDataClient['phone'].errors['required']">El teléfono es
+                obligatorio</div>
+            <div *ngIf="formDataClient['phone'].errors['minLength']">El teléfono debe tener minimo 7 máximo 10</div>
+        </div>
+        <div class="invalid-data" *ngIf="formDataClient['phone'].errors?.['minlength']">
+            El teléfono debe tener mínimo 7 dígitos.
+        </div>
+        <div class="invalid-data" *ngIf="formDataClient['phone'].errors?.['maxlength']">
+            El teléfono debe tener máximo 10 dígitos.
+        </div>
+        <button [disabled]="formSearchClient.invalid" type="submit" (click)="findByPhoneNumber()">BUSCAR</button>
+    </form>
+    <div *ngIf="viewCreateClient">
+        <hr />
+        <app-create-client [valuePhone]="formDataClient['phone'].value"></app-create-client>
+    </div>
+</div>
